@@ -40,7 +40,7 @@ namespace PoeParse
 
         private void poeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            string nextChangeId = string.Empty;
+            string nextChangeId = "49220553-52217421-48795973-56782655-52819803";
             var searchParams = (SearchParams) e.Argument;
             var counter = 0;
 
@@ -71,7 +71,7 @@ namespace PoeParse
                         {
                             stashes.ToList().ForEach(p =>
                             {
-                                Ausgabe = $"Name {p.accountName} {Environment.NewLine} {Ausgabe}";
+                                Ausgabe = $"{DateTime.Now.ToLongTimeString()} Accountname {p.accountName} | Charname: {p.lastCharacterName} | ID: {nextChangeId} {Environment.NewLine} {Ausgabe}";
                             });
 
                             //stashes.ToList().ForEach(item =>
@@ -82,14 +82,14 @@ namespace PoeParse
                         }
                         else
                         {
-                            Ausgabe = $"Nichts gefunden für ID: {nextChangeId} {Environment.NewLine} {Ausgabe}";
+                            Ausgabe = $"{DateTime.Now.ToLongTimeString()} ID: {nextChangeId} | Count {root.stashes.Count()} {Environment.NewLine} {Ausgabe}";
                         }
 
                         File.WriteAllText(@"c:\Temp\poeausgabe.txt", this.AusgabeText.Text);
                         nextChangeId = root.next_change_id;
 
                         poeBackgroundWorker.ReportProgress(counter);
-                        Thread.Sleep(1000);
+                        //Thread.Sleep(5000);
                     }
                 }
                 catch (Exception exception)
